@@ -1,0 +1,21 @@
+.container{
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    margin-right: 2em;
+    padding: 2px;
+}
+.controls{
+    display: flex;
+    margin-right: 2px;
+    
+}
+.controls button{
+    margin-left: 10px;
+}
+
+.result{
+    display: flex;
+    margin-right: 2px;
+    padding: 2px;
+}
