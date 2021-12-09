@@ -31,6 +31,8 @@ orderBook: any;
     .then(cryptos => this.cryptos.push(cryptos) )
     .catch(error => console.log(error))
     console.log(this.cryptos);
+    setInterval(()=>{this.onClick()},
+    10000)
   }
 onClick(){
 
