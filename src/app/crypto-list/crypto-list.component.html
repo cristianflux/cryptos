@@ -6,11 +6,13 @@
             <option value="ethbtc">ETH/BTC</option>
         </select>
         <button (click)="onClick()">Refresh</button>
+        
     </div>
     <div class="result">
         <div class="container" *ngFor="let crypto of cryptos">
             <p>Bid: {{crypto.bid}}</p>
             <p>Ask {{crypto.ask}}</p>
+            <p>{{count}}</p>
         </div>
     </div>
     

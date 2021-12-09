@@ -10,6 +10,7 @@ export class CryptoListComponent implements OnInit {
 
 cryptos: any[];
 ticker!: string;
+count!: number;
 orderBook: any;
   constructor(
     private cryptoService: CryptosService
@@ -22,6 +23,7 @@ orderBook: any;
     .then(cryptos => this.cryptos.push(cryptos) )
     .catch(error => console.log(error))
     console.log(this.cryptos);
+    this.count = 10;
   }
   onChange($event: any){
     console.log($event.target.value);
@@ -31,11 +33,18 @@ orderBook: any;
     .then(cryptos => this.cryptos.push(cryptos) )
     .catch(error => console.log(error))
     console.log(this.cryptos);
-    setInterval(()=>{this.onClick()},
-    10000)
+    setInterval(()=>{
+      if(this.count!=0){
+        console.log(this.count);
+        this.count = this.count - 1;
+      }else{
+        this.onClick();
+         }
+      },
+    1000)
   }
 onClick(){
-
+  this.count = 10;
   console.log(this.ticker);
   this.cryptoService.getTicker(this.ticker)
     .then(cryptos => {this.cryptos=[],this.cryptos.push(cryptos)} )
