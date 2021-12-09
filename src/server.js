@@ -3,9 +3,11 @@ const path = require('path');
 
 const app = express();
 
-app.use(express.static(__dirname+'/cryptos/ng-blog'));
-app.get('/',function(req,res){
-    res.sendFile(path.join(__dirname+'/cryptos/ng-blog/index.html'));
-});
+if (process.env.NODE_ENV === 'production') {
+	app.use(express.static('dist/cryptos'));
+}
 
+app.get('*', (request, response) => {
+	response.sendFile(path.join(__dirname, 'dist/cryptos', 'index.html'));
+});
 app.listen(process.env.PORT || 8080);
