@@ -12,6 +12,7 @@ cryptos: any[];
 ticker!: string;
 count!: number;
 orderBook: any;
+interval!: any;
   constructor(
     private cryptoService: CryptosService
   ) {
@@ -23,7 +24,9 @@ orderBook: any;
     .then(cryptos => this.cryptos.push(cryptos) )
     .catch(error => console.log(error))
     console.log(this.cryptos);
-    this.count = 10;
+    this.count = 5;
+    this.startInterval();
+    
   }
   onChange($event: any){
     console.log($event.target.value);
@@ -33,18 +36,10 @@ orderBook: any;
     .then(cryptos => this.cryptos.push(cryptos) )
     .catch(error => console.log(error))
     console.log(this.cryptos);
-    setInterval(()=>{
-      if(this.count!=0){
-        console.log(this.count);
-        this.count = this.count - 1;
-      }else{
-        this.onClick();
-         }
-      },
-    1000)
+    this.startInterval();
   }
 onClick(){
-  this.count = 10;
+  this.startInterval();
   console.log(this.ticker);
   this.cryptoService.getTicker(this.ticker)
     .then(cryptos => {this.cryptos=[],this.cryptos.push(cryptos)} )
@@ -55,6 +50,23 @@ onClick(){
     .then(orderBook => this.orderBook = orderBook)
     .catch(error => console.log(error))
     console.log('Order Books bids '+this.orderBook.bids);
+    
+}
+startInterval(){
+  if(this.interval!=null){
+    clearInterval(this.interval);
+    this.count = 5;
+  }
+  this.interval = setInterval(()=>{
+    if(this.count!=0){
+      console.log(this.count);
+      this.count = this.count - 1;
+    }else{
+      clearInterval(this.interval);
+      this.onClick();
+       }
+    },
+  1000)
 }
 
 }
