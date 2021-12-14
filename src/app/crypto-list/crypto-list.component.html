@@ -10,12 +10,11 @@
     </div>
     <div class="result">
         <div class="container" *ngFor="let crypto of cryptos">
-            <p>Bid: {{crypto.bid}}</p>
-            <p>Ask {{crypto.ask}}</p>
+            <p >Date: {{crypto.timestamp*1000|date: 'dd/MM/yyyy h:mm:ss a'}}</p>
+            <p [ngStyle]="bidStyle">Bid: {{crypto.bid}}</p>
+            <p [ngStyle]="askStyle">Ask: {{crypto.ask}}</p>
             <p>Refresh:&nbsp; {{count}}</p>
         </div>
     </div>
-    
-
 </div>
 
